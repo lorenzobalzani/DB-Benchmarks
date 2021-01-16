@@ -1,11 +1,10 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+package Utils;
 
-public class PosteGreUtility {
+import java.sql.*;
+public class PostGreUtils {
     private Connection connection;
 
-    public final void connect(final String url, final String user, final String password) {
+    public final void connectToPostGreSQL(final String url, final String user, final String password) {
         try {
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connected to the PostgreSQL server successfully.");
@@ -14,7 +13,7 @@ public class PosteGreUtility {
         }
     }
 
-    public final void executeSelect() {
-
+    public Connection getConnection() {
+        return connection;
     }
 }
