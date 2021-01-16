@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 /**
- * Main.Account is created by using Builder design pattern
+ * Account is created by using Builder design pattern
  */
 public class Account {
     private String username;
@@ -15,7 +15,8 @@ public class Account {
     private String gender;
     private Timestamp created_on;
 
-    private Account(String username, String password, String email, String firstname, String lastname, String gender, Timestamp created_on) {
+    private Account(final String username, final String password, final String email, final String firstname,
+                    final String lastname, final String gender, final Timestamp created_on) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -62,37 +63,37 @@ public class Account {
         private String gender = null;
         private Timestamp created_on = null;
 
-        public AccountBuilder username(String username) {
+        public AccountBuilder username(final String username) {
             this.username = username;
             return this;
         }
 
-        public AccountBuilder password(String password) {
+        public AccountBuilder password(final String password) {
             this.password = password;
             return this;
         }
 
-        public AccountBuilder email(String email) {
+        public AccountBuilder email(final String email) {
             this.email = email;
             return this;
         }
 
-        public AccountBuilder firstname(String firstname) {
+        public AccountBuilder firstname(final String firstname) {
             this.firstname = firstname;
             return this;
         }
 
-        public AccountBuilder lastname(String lastname) {
+        public AccountBuilder lastname(final String lastname) {
             this.lastname = lastname;
             return this;
         }
 
-        public AccountBuilder gender(String gender) {
+        public AccountBuilder gender(final String gender) {
             this.gender = gender;
             return this;
         }
 
-        public AccountBuilder created_on(Timestamp created_on) {
+        public AccountBuilder created_on(final Timestamp created_on) {
             this.created_on = created_on;
             return this;
         }
