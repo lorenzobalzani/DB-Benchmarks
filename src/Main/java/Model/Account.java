@@ -59,8 +59,8 @@ public class Account {
         private String email = null;
         private String firstname = null;
         private String lastname = null;
-        private Optional<String> gender = Optional.empty();
-        private Optional<Timestamp> created_on = Optional.empty();
+        private String gender = null;
+        private Timestamp created_on = null;
 
         public AccountBuilder username(String username) {
             this.username = username;
@@ -88,21 +88,21 @@ public class Account {
         }
 
         public AccountBuilder gender(String gender) {
-            this.gender = Optional.ofNullable(gender);
+            this.gender = gender;
             return this;
         }
 
         public AccountBuilder created_on(Timestamp created_on) {
-            this.created_on = Optional.ofNullable(created_on);
+            this.created_on = created_on;
             return this;
         }
 
         public Account build() throws IllegalStateException{
             if (this.username == null || this.password == null || this.email == null
                     || this.firstname == null || this.lastname == null
-            || this.gender.isEmpty() || this.created_on.isEmpty()){
+            || this.gender == null || this.created_on == null){
                 throw new IllegalStateException("Some field are empty."); }
-            return new Account(this.username, this.password, this.email, this.firstname, this.lastname, this.gender.get(), this.created_on.get()); }
+            return new Account(this.username, this.password, this.email, this.firstname, this.lastname, this.gender, this.created_on); }
     }
 }
 

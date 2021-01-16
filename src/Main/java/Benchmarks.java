@@ -1,5 +1,3 @@
-package Main;
-
 import Test.DeleteTableTest;
 import Test.InsertTest;
 import Test.SelectTest;
@@ -20,7 +18,7 @@ public class Benchmarks {
     }
 
     public void startBenchmarks() {
-        new DeleteTableTest().executeTest(utility.getConnection());
+        //new DeleteTableTest().executeTest(utility.getConnection());
         testInsert();
         testSelect();
     }
