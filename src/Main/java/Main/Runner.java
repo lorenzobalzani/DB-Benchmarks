@@ -9,6 +9,6 @@ import Benchmark.Benchmarks;
 public class Runner {
     public Runner(Benchmarks myBenchmarks) {
         myBenchmarks.startBenchmarks("1", 20, 20, 23);
-        myBenchmarks.startBenchmarks("2", 100, 100, 50);
+        myBenchmarks.startBenchmarks("2", 1000, 1000, 50);
     }
 }

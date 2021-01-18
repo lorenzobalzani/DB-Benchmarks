@@ -27,7 +27,7 @@ public class MyBenchmarks implements Benchmarks {
 
     @Override
     public void startBenchmarks(final String benchmarkName, final int nInsert, final int nSelect, final int commitAfterX) {
-        System.out.println("Benchmark: " + benchmarkName);
+        System.out.println("\nBenchmark: " + benchmarkName);
         this.commitAfterX = commitAfterX;
         performTest(new InsertTest(), nInsert, "Insert test");
         performTest(new SelectTest(), nSelect, "Select test");
@@ -38,12 +38,11 @@ public class MyBenchmarks implements Benchmarks {
         final List<Double> list = new ArrayList<>();
         try {
             for (int i = 1; i <= nExecutions; i++) {
-                    final Class<?> testClass = testType.getClass();
-                    final Method method = testClass.getMethod("executeTest", Connection.class);
-                    Double timeToExecute = (Double) method.invoke(testType, utility.getConnection());
+                    final Test myTest = testType.getClass().getConstructor().newInstance();
+                    Double timeToExecute = myTest.executeTest(utility.getConnection());
                     processResult(list, (i == nExecutions || i % this.commitAfterX == 0), timeToExecute);
             }
-        } catch (NoSuchMethodException|IllegalAccessException| InvocationTargetException error) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException error) {
             System.err.println(error.getMessage());
         }
         createStats(testName, list);
