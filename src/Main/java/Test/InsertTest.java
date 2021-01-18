@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * Insert implementation of {@link Test}
  * @author lorenzobalzani
  */
-public final class InsertTest implements Test {
+public class InsertTest implements Test {
     private final Account account;
 
     public InsertTest() {
@@ -26,18 +26,24 @@ public final class InsertTest implements Test {
     }
 
     @Override
-    public final Double executeTest(final Connection connection) throws SQLException {
-        PreparedStatement st = connection.prepareStatement("INSERT INTO Accounts (username, password, email, firstname, lastname, gender, created_on) VALUES (?, ?, ?, ?, ?, ? ,?)");
-        st.setString(1, account.getUsername());
-        st.setString(2, account.getPassword());
-        st.setString(3, account.getEmail());
-        st.setString(4, account.getFirstname());
-        st.setString(5, account.getLastname());
-        st.setString(6, account.getGender());
-        st.setTimestamp(7, account.getCreated_on());
-        long start = System.nanoTime();
-        st.executeUpdate();
-        long finish = System.nanoTime() - start;
+    public Double executeTest(final Connection connection) {
+        PreparedStatement st = null;
+        long finish = 0;
+        try {
+            st = connection.prepareStatement("INSERT INTO Accounts (username, password, email, firstname, lastname, gender, created_on) VALUES (?, ?, ?, ?, ?, ? ,?)");
+            st.setString(1, account.getUsername());
+            st.setString(2, account.getPassword());
+            st.setString(3, account.getEmail());
+            st.setString(4, account.getFirstname());
+            st.setString(5, account.getLastname());
+            st.setString(6, account.getGender());
+            st.setTimestamp(7, account.getCreated_on());
+            long start = System.nanoTime();
+            st.executeUpdate();
+            finish = System.nanoTime() - start;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return (double) finish;
     }
 }

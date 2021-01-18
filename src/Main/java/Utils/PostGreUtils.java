@@ -20,7 +20,7 @@ public class PostGreUtils {
         try {
             connection = DriverManager.getConnection(url, user, password);
             connection.setAutoCommit(autoCommit);
-            System.out.println("Connected to the PostgreSQL server successfully with auto-commit = " + autoCommit);
+            System.out.println("Connected to the PostGreSQL server successfully with auto-commit = " + autoCommit);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -32,9 +32,5 @@ public class PostGreUtils {
      */
     public Connection getConnection() {
         return connection;
-    }
-
-    public void initTransaction() {
-
     }
 }

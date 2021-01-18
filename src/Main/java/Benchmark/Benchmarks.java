@@ -2,6 +2,7 @@ package Benchmark;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import Test.Test;
 
 /**
  * Benchmarks interface to implement when creating new types of benchmarks
@@ -10,23 +11,20 @@ import java.util.List;
 public interface Benchmarks {
     /**
      * Begin insert and select tests
+     * @param benchmarkName name to be printed on screen
      * @param nInsert number of insert queries to perform
      * @param nSelect number of insert queries to perform
      * @param commitAfterX number of statements to perform before issue a commit
      */
-    void startBenchmarks(int nInsert, int nSelect, int commitAfterX);
+    void startBenchmarks(String benchmarkName, int nInsert, int nSelect, int commitAfterX);
 
     /**
-     * It performs nExecutions insert queries
-     * @param nExecutions number of insert queries
+     *
+     * @param testType type of test to be executed
+     * @param nExecutions number of executions for the given test type
+     * @param testName name to be printed on screen
      */
-    void testInsert(int nExecutions);
-
-    /**
-     * It performs nExecutions select queries
-     * @param nExecutions number of select queries
-     */
-    void testSelect(int nExecutions);
+    void performTest(Test testType, int nExecutions, String testName);
 
     /**
      * It creates and prints time statistics (expressed in milliseconds) on screen.

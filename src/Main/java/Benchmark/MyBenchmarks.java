@@ -2,14 +2,18 @@ package Benchmark;
 
 import Test.InsertTest;
 import Test.SelectTest;
+import Test.Test;
 import Utils.PostGreUtils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of {@link Benchmarks Benchmarks} class.s
+ * Implementation of {@link Benchmark.Benchmarks Benchmarks} class.
  * @author lorenzobalzani
  */
 public class MyBenchmarks implements Benchmarks {
@@ -22,38 +26,27 @@ public class MyBenchmarks implements Benchmarks {
     }
 
     @Override
-    public void startBenchmarks(final int nInsert, final int nSelect, final int commitAfterX) {
+    public void startBenchmarks(final String benchmarkName, final int nInsert, final int nSelect, final int commitAfterX) {
+        System.out.println("Benchmark: " + benchmarkName);
         this.commitAfterX = commitAfterX;
-        testInsert(nInsert);
-        testSelect(nSelect);
+        performTest(new InsertTest(), nInsert, "Insert test");
+        performTest(new SelectTest(), nSelect, "Select test");
     }
 
     @Override
-    public void testInsert(final int nExecutions) {
+    public void performTest(final Test testType, final int nExecutions, final String testName) {
         final List<Double> list = new ArrayList<>();
-        for (int i = 1; i <= nExecutions; i++) {
-            try {
-                Double timeToExecute = new InsertTest().executeTest(utility.getConnection());
-                processResult(list, (i % this.commitAfterX == 0 || i == nExecutions), timeToExecute);
-            } catch (SQLException error) {
-                System.err.println(error.getMessage());
+        try {
+            for (int i = 1; i <= nExecutions; i++) {
+                    final Class<?> testClass = testType.getClass();
+                    final Method method = testClass.getMethod("executeTest", Connection.class);
+                    Double timeToExecute = (Double) method.invoke(testType, utility.getConnection());
+                    processResult(list, (i == nExecutions || i % this.commitAfterX == 0), timeToExecute);
             }
+        } catch (NoSuchMethodException|IllegalAccessException| InvocationTargetException error) {
+            System.err.println(error.getMessage());
         }
-        createStats("Insert statements", list);
-    }
-
-    @Override
-    public void testSelect(final int nExecutions) {
-        List<Double> list = new ArrayList<>();
-        for (int i = 1; i <= nExecutions; i++) {
-            try {
-                Double timeToExecute = new SelectTest().executeTest(utility.getConnection());
-                processResult(list, (i % this.commitAfterX == 0 || i == nExecutions), timeToExecute);
-            } catch (SQLException error) {
-                System.err.println(error.getMessage());
-            }
-        }
-        createStats("Select statements", list);
+        createStats(testName, list);
     }
 
     private void processResult(List<Double> list, boolean commit, Double timeToExecute) {

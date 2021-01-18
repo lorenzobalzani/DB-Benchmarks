@@ -7,7 +7,8 @@ import Benchmark.Benchmarks;
  * @author lorenzobalzani
  */
 public class Runner {
-    public Runner(Benchmarks benchmarks) {
-        benchmarks.startBenchmarks(100, 100, 23);
+    public Runner(Benchmarks myBenchmarks) {
+        myBenchmarks.startBenchmarks("1", 20, 20, 23);
+        myBenchmarks.startBenchmarks("2", 100, 100, 50);
     }
 }
