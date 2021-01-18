@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"Model","l":"Account"},{"p":"Model","l":"Account.AccountBuilder"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"Benchmark","l":"Benchmarks"},{"p":"Test","l":"InsertTest"},{"p":"Main","l":"Main"},{"p":"Benchmark","l":"MyBenchmarks"},{"p":"Utils","l":"PostGreUtils"},{"p":"Main","l":"Runner"},{"p":"Test","l":"SelectTest"},{"p":"Test","l":"Test"}]
