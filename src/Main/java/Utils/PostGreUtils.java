@@ -12,13 +12,15 @@ public class PostGreUtils {
     /**
      * It establishes a new connection to the DB.
      * @param url of the DB
-     * @param user
-     * @param password
+     * @param user to login
+     * @param password to login
+     * @param autoCommit specifies whether users has to explicitly commit after statements.
      */
-    public final void connectToPostGreSQL(final String url, final String user, final String password) {
+    public final void connectToPostGreSQL(final String url, final String user, final String password, final boolean autoCommit) {
         try {
             connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
+            connection.setAutoCommit(autoCommit);
+            System.out.println("Connected to the PostgreSQL server successfully with auto-commit = " + autoCommit);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -30,5 +32,9 @@ public class PostGreUtils {
      */
     public Connection getConnection() {
         return connection;
+    }
+
+    public void initTransaction() {
+
     }
 }

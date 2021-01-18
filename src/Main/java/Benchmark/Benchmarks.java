@@ -12,8 +12,9 @@ public interface Benchmarks {
      * Begin insert and select tests
      * @param nInsert number of insert queries to perform
      * @param nSelect number of insert queries to perform
+     * @param commitAfterX number of statements to perform before issue a commit
      */
-    void startBenchmarks(int nInsert, int nSelect);
+    void startBenchmarks(int nInsert, int nSelect, int commitAfterX);
 
     /**
      * It performs nExecutions insert queries

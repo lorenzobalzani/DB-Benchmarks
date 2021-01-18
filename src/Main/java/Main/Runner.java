@@ -8,6 +8,6 @@ import Benchmark.Benchmarks;
  */
 public class Runner {
     public Runner(Benchmarks benchmarks) {
-        benchmarks.startBenchmarks(100, 100);
+        benchmarks.startBenchmarks(100, 100, 23);
     }
 }

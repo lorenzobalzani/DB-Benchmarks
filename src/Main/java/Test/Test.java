@@ -1,7 +1,7 @@
 package Test;
 
 import java.sql.Connection;
-import java.util.Optional;
+import java.sql.SQLException;
 
 /**
  * Test interface to implement when creating new type of test
@@ -13,5 +13,5 @@ public interface Test {
      * It performs a generic test on a RDBMS using a {@link java.sql.Connection} object
      * @return Optional that might contain the select time duration expressed in nanoseconds (10^-9)
      */
-    Optional<Double> executeTest(final Connection connection);
+    Double executeTest(final Connection connection) throws SQLException;
 }

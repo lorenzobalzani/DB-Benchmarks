@@ -16,23 +16,19 @@ import java.util.Random;
 public final class SelectTest implements Test {
 
    @Override
-    public final Optional<Double> executeTest(Connection connection) {
+    public final Double executeTest(final Connection connection) throws SQLException {
         Random rand = new Random();
         String operators = "<>=";
-        try {
-            PreparedStatement st = connection.prepareStatement("SELECT id FROM accounts WHERE id"
-                    + operators.charAt(rand.nextInt(operators.length()))  + "?");
-            st.setInt(1, rand.nextInt(1000));
-            long start = System.nanoTime();
-            ResultSet rs = st.executeQuery();
-            long finish = System.nanoTime() - start;
-            rs.close();
-            st.close();
-            return Optional.of((double) finish);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return Optional.empty();
+        PreparedStatement st = connection.prepareStatement("SELECT id FROM accounts WHERE id"
+                + operators.charAt(rand.nextInt(operators.length()))  + "?");
+        st.setInt(1, rand.nextInt(1000));
+        st.setInt(1, rand.nextInt(1000));
+        long start = System.nanoTime();
+        ResultSet rs = st.executeQuery();
+        long finish = System.nanoTime() - start;
+        rs.close();
+        st.close();
+        return (double) finish;
     }
 }
 
