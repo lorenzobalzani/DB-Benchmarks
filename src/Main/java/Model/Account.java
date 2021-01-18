@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 /**
- * Account is created by using Builder design pattern
+ * The following class models a DB account object.
+ * @author lorenzobalzani
  */
 public class Account {
     private String username;
@@ -54,6 +55,10 @@ public class Account {
         return created_on;
     }
 
+    /**
+     * {@link Account} object is being created using builder design pattern.
+     * @author lorenzobalzani
+     */
     public static class AccountBuilder{
         private String username = null;
         private String password = null;
@@ -63,41 +68,73 @@ public class Account {
         private String gender = null;
         private Timestamp created_on = null;
 
+        /**
+         * @param username string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder username(final String username) {
             this.username = username;
             return this;
         }
 
+        /**
+         * @param password string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder password(final String password) {
             this.password = password;
             return this;
         }
 
+        /**
+         * @param email string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder email(final String email) {
             this.email = email;
             return this;
         }
 
+        /**
+         * @param firstname string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder firstname(final String firstname) {
             this.firstname = firstname;
             return this;
         }
 
+        /**
+         * @param lastname string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder lastname(final String lastname) {
             this.lastname = lastname;
             return this;
         }
 
+        /**
+         * @param gender string
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder gender(final String gender) {
             this.gender = gender;
             return this;
         }
 
+        /**
+         * @param timestamp when the account is created
+         * @return {@link AccountBuilder} object
+         */
         public AccountBuilder created_on(final Timestamp created_on) {
             this.created_on = created_on;
             return this;
         }
 
+        /**
+         * @return {@link Account} object
+         * @throws IllegalStateException if any of the field are empty
+         */
         public Account build() throws IllegalStateException{
             if (this.username == null || this.password == null || this.email == null
                     || this.firstname == null || this.lastname == null

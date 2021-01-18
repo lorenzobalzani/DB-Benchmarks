@@ -7,6 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * Insert implementation of {@link Test}
+ * @author lorenzobalzani
+ */
 public final class InsertTest implements Test {
     private Account account;
 

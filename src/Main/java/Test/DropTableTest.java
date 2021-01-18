@@ -5,7 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class DeleteTableTest implements Test {
+/**
+ * Drop table implementation of {@link Test}
+ * @author lorenzobalzani
+ */
+public class DropTableTest implements Test {
+
     @Override
     public Optional<Double> executeTest(Connection connection) {
         try {

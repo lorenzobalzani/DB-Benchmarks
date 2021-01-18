@@ -1,4 +1,6 @@
 package Test;
+import Model.Account;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,13 +8,14 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Random;
 
+
+/**
+ * Select implementation of {@link Test}.
+ * @author lorenzobalzani
+ */
 public final class SelectTest implements Test {
 
-    /**
-     * It performs random select statements
-     * @return Optional that might contain the select time duration expressed in nanoseconds (10^-9)
-     */
-    @Override
+   @Override
     public final Optional<Double> executeTest(Connection connection) {
         Random rand = new Random();
         String operators = "<>=";

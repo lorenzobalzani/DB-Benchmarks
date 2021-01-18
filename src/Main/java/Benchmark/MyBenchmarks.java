@@ -1,31 +1,36 @@
-import Test.DeleteTableTest;
+package Benchmark;
+
 import Test.InsertTest;
 import Test.SelectTest;
 import Utils.PostGreUtils;
 
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
 
-public class Benchmarks {
+/**
+ * Implementation of {@link Benchmarks Benchmarks} class.s
+ * @author lorenzobalzani
+ */
+public class MyBenchmarks implements Benchmarks {
 
     private final PostGreUtils utility;
-    private static final int N_EXECUTIONS = 100;
 
-    public Benchmarks(final PostGreUtils utility) {
+    public MyBenchmarks(final PostGreUtils utility) {
         this.utility = utility;
     }
 
-    public void startBenchmarks() {
+    @Override
+    public void startBenchmarks(final int nInsert, final int nSelect) {
         //new DeleteTableTest().executeTest(utility.getConnection());
-        testInsert();
-        testSelect();
+        testInsert(nInsert);
+        testSelect(nSelect);
     }
 
-    private void testInsert() {
+    @Override
+    public void testInsert(final int nExecutions) {
         List<Double> list = new ArrayList<>();
-        for (int i = 0; i < N_EXECUTIONS; i++) {
+        for (int i = 0; i < nExecutions; i++) {
             Optional<Double> timeToExecute = new SelectTest().executeTest(utility.getConnection());
             if (timeToExecute.isPresent()) {
                 list.add(timeToExecute.get());
@@ -36,9 +41,10 @@ public class Benchmarks {
         createStats("Insert statements", list);
     }
 
-    private void testSelect() {
+    @Override
+    public void testSelect(final int nExecutions) {
         List<Double> list = new ArrayList<>();
-        for (int i = 0; i < N_EXECUTIONS; i++) {
+        for (int i = 0; i < nExecutions; i++) {
             Optional<Double> timeToExecute = new InsertTest().executeTest(utility.getConnection());
             if (timeToExecute.isPresent()) {
                 list.add(timeToExecute.get());
@@ -47,16 +53,5 @@ public class Benchmarks {
             }
         }
         createStats("Select statements", list);
-    }
-
-    public void createStats(String testName, List<? extends Number> timeList) {
-        DoubleSummaryStatistics stats = timeList
-                .stream()
-                .mapToDouble(Number::doubleValue)
-                .summaryStatistics();
-        System.out.println("----TEST: " + testName + " in ms----");
-        System.out.println("Min time: " + stats.getMin() / 1e6);
-        System.out.println("Max time: " + stats.getMax() /1e6);
-        System.out.println("Avg time: " + stats.getAverage() / 1e6);
     }
 }
