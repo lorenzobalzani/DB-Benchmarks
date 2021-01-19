@@ -3,6 +3,7 @@
 
 ## Table of contents
 * [Run](#run)
+* [Docs](#docs)
 * [Status](#status)
 * [Contact](#contact)
 
@@ -12,6 +13,9 @@ Clone the repo and open a terminal in the folder. Then tip the following command
 * nInsert: number of insert queries to perform;
 * nSelect: number of select queries to perform;
 * commitAfterX: commit transactions after X insert/select queries.
+
+## Docs
+To see docs please go here: https://lorenzobalzani.github.io/DB-Benchmarks/
 
 ## Status
 Project is not actually maintained.
