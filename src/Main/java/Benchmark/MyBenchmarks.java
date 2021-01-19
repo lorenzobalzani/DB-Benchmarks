@@ -28,6 +28,7 @@ public class MyBenchmarks implements Benchmarks {
     @Override
     public void startBenchmarks(final String benchmarkName, final int nInsert, final int nSelect, final int commitAfterX) {
         System.out.println("\nBenchmark: " + benchmarkName);
+        System.out.println("nInsert: " + nInsert + " - nSelect: " + nSelect + " - commitAfterX: " + commitAfterX);
         this.commitAfterX = commitAfterX;
         performTest(new InsertTest(), nInsert, "Insert test");
         performTest(new SelectTest(), nSelect, "Select test");
